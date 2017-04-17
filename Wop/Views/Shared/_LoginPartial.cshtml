@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+        <form action="javascript:document.getElementById('logoutForm').submit()">
+            <span class="mdl-chip">
+                <span class="mdl-chip__text">@Html.ActionLink("Здравствуйте, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</span>
+            </span>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" formaction="/Stickers">Главная</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Выйти</button>
+            
+        </form>
+    }
+}
+else
+{
+    <form>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" formaction="/Stickers">Главная</button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" formaction="/Account/Login">Войти</button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" formaction="/Account/Register">Регистрация</button>
+        
+    </form>
+}
+

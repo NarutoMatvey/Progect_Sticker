@@ -1,0 +1,114 @@
+﻿@model Wop.Models.Izbran
+
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Главная";
+}
+@if (ViewBag.Title == "Главная")
+{
+
+    <div class="mdl-layout__drawer">
+        <nav class="mdl-navigation">
+            <div class="demo-list-action mdl-list">
+                <div class="mdl-list__item">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <form action="/Stickers/Izbran" method="post">
+
+                            <input class="mdl-textfield__input" name="Poisc" type="text" id="sample3">
+                            <label class="mdl-textfield__label" for="sample3">Текст для поиска</label>
+
+                        </form>
+                    </div>
+                </div>
+                    @foreach (var item in Model.ElStik)
+                {
+                        <div class="mdl-list__item">
+                            <span>@Html.ActionLink(item.Title, "Details", new { id = item.Id })</span>
+                            @{
+                                int cho = 1;
+                                foreach (var elem in Model.ElSelect)
+                                {
+                                    if (elem.StickId == item.Id && elem.UserId == User.Identity.GetUserId())
+                                    {
+                                        cho = 0;
+                                        break;
+                                    }
+                                }
+                                if (cho == 1)
+                                {
+                                    <a class="material-icons mdl-list__item-secondary-action " href="~/Stickers/Izbran?StickId=@item.Id&UserId=@User.Identity.GetUserId()"><img class="icon icons8-Добавить-в-избранное" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACy0lEQVRoQ+2YO3bTQBSG/1uYQ4d3EKeSyriIXJKsAFbAYwWIhhanpUGsIAkrgBVgSiuFXcpVlB04HQeKyxk9wJIlzVx5xjk+J2p1pfm/+8+98yAc+EMHrh+PAA/toFMH+MY/U4B0msxcgboFiP0fGUCQnB8cQJZ9RgYAwrkrF5w5wHn2sykEYObKBScAleyXc8eRC24AqtkvEZy4YB2gMfsOXbAP0Jx9Zy5YBejMviMX7AJ0Z9+JC9YAjLJfIgxwTOMktbG42QOI/SsArw1FXVOQvDGM7QyzAsALf4Q/uBUJsuSCGKAQewTCGZiHAJ2AMQJhJAJgpCCkAC9BtAZjhgHupFOrEeCfSPAJiIZgtSUoxIpU9g3mJUBrEGZgXgO0bIOrAPCNF4Lpc99hN7979eFZ5TdfP93b+C1A/J5OV9H/rlz7LcuKsVWUI4Ct4m+eQhYgHAA0dq7WIt7VCcsArW23swvtAmERoHPN0LZRE4i6WNNqNShs7YKnBVBidBCOALTi89Oq4dMF4QDASLwIoMsJywDG4sUAGYThYteziN9SkKhNofFjPIU2/8ixFwH0rmsUOQB/oWAVGisvAvsBzL1vIHphFYD5O01WL/cDEHuLbBfa8fRwYEnBarwnAJ91A8kBsitI8YwQfyA6Ouoo6+97XH7JAWJfHQUvpdoM4913IZ77UxA+GgqShTEuaJJMJR/1cUDd9T+XDCKI/UlBUl4IG30mB5j7t0bnX8YdCHk2Gcq1I60iRkqT5FgbtxEgB4g1HagQXl9RWdWOAYi0E4kAujsQ34Mp0s3hvIY4BKh6aC6zKuxEQoCmQ38uHE9+RTRO1yb282I0xO+nYQuIqBPJACp7ILnwOlwziGxPJATwyw50jQGm0kuoNneKeyhV8OpqUtSJhABehAFFtoRvO6KuKDmU7EpFACbze98xjwD7zvj2/u+hFew4/l/x0VNA6q3cjQAAAABJRU5ErkJggg==" width="48" height="48"></a>
+                                }
+                            }
+                        </div>
+
+                                }
+                </div>
+</nav>
+    </div>
+}
+<main class="mdl-layout__content">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col" id="left-box"></div>
+        <div class="mdl-cell mdl-cell--8-col">
+            <div class="mdl-cell mdl-cell--12-col" id="centr_cont">
+                <div id="doska">
+                    @foreach (var item in Model.ElStik)
+                    {
+                        <div class="mdl-card">
+                            <div class="mdl-card__title">
+                                <h2>@item.Title</h2>
+                                @{
+
+                                    int cho = 1;
+                                    foreach (var elem in Model.ElSelect)
+                                    {
+                                        if (elem.StickId == item.Id && elem.UserId == User.Identity.GetUserId())
+                                        {
+                                            cho = 0;
+                                            break;
+                                        }
+                                    }
+                                    if (cho == 1)
+                                    {
+                                        <div id="Izbran"><a href="~/Stickers/Izbran?StickId=@item.Id&UserId=@User.Identity.GetUserId()"><img class="icon icons8-Добавить-в-избранное" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAACy0lEQVRoQ+2YO3bTQBSG/1uYQ4d3EKeSyriIXJKsAFbAYwWIhhanpUGsIAkrgBVgSiuFXcpVlB04HQeKyxk9wJIlzVx5xjk+J2p1pfm/+8+98yAc+EMHrh+PAA/toFMH+MY/U4B0msxcgboFiP0fGUCQnB8cQJZ9RgYAwrkrF5w5wHn2sykEYObKBScAleyXc8eRC24AqtkvEZy4YB2gMfsOXbAP0Jx9Zy5YBejMviMX7AJ0Z9+JC9YAjLJfIgxwTOMktbG42QOI/SsArw1FXVOQvDGM7QyzAsALf4Q/uBUJsuSCGKAQewTCGZiHAJ2AMQJhJAJgpCCkAC9BtAZjhgHupFOrEeCfSPAJiIZgtSUoxIpU9g3mJUBrEGZgXgO0bIOrAPCNF4Lpc99hN7979eFZ5TdfP93b+C1A/J5OV9H/rlz7LcuKsVWUI4Ct4m+eQhYgHAA0dq7WIt7VCcsArW23swvtAmERoHPN0LZRE4i6WNNqNShs7YKnBVBidBCOALTi89Oq4dMF4QDASLwIoMsJywDG4sUAGYThYteziN9SkKhNofFjPIU2/8ixFwH0rmsUOQB/oWAVGisvAvsBzL1vIHphFYD5O01WL/cDEHuLbBfa8fRwYEnBarwnAJ91A8kBsitI8YwQfyA6Ouoo6+97XH7JAWJfHQUvpdoM4913IZ77UxA+GgqShTEuaJJMJR/1cUDd9T+XDCKI/UlBUl4IG30mB5j7t0bnX8YdCHk2Gcq1I60iRkqT5FgbtxEgB4g1HagQXl9RWdWOAYi0E4kAujsQ34Mp0s3hvIY4BKh6aC6zKuxEQoCmQ38uHE9+RTRO1yb282I0xO+nYQuIqBPJACp7ILnwOlwziGxPJATwyw50jQGm0kuoNneKeyhV8OpqUtSJhABehAFFtoRvO6KuKDmU7EpFACbze98xjwD7zvj2/u+hFew4/l/x0VNA6q3cjQAAAABJRU5ErkJggg==" width="48" height="48"></a></div>
+                                    }
+
+                                }
+                            </div>
+                            <div class="mdl-card__media">
+                                <div id="TextT">@item.Text</div><img align="middle" src="@item.Url" alt="Картинка не существует" />
+                            </div>
+                            <div class="mdl-card__supporting-text">
+                                Время: @item.Date.Hour:@item.Date.Minute
+                                Дата: @item.Date.Day.@item.Date.Month.@item.Date.Year
+                            </div>
+                            <div class="mdl-card__actions">
+
+                                @Html.ActionLink("Просмотр", "Details", new { id = item.Id })
+                                @if (item.UserName == User.Identity.GetUserName())
+                                {
+                                    @Html.ActionLink("Редактирование ", "Edit", new { id = item.Id })
+                                    @Html.ActionLink("Удаление", "Delete", new { id = item.Id })
+                                }
+
+                            </div>
+                        </div>
+                                    }
+                </div>
+            </div>
+
+            @if (User.Identity.GetUserId() != null)
+            {
+                <div class="mdl-cell mdl-cell--3-col mdl-cell--9-offset">
+                    <form>
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" formaction="@Url.Action("Create", "Stickers")" id="plas_elem">
+                            Добавить объявление
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+        <div class="mdl-cell mdl-cell--2-col" id="filtr"></div>
+    </div>
+</main>

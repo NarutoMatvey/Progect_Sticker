@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNet.Identity;
+@model Wop.Models.OneElem
+
+@{
+ViewBag.Title = Model.ElStik.Title;
+}
+
+<!DOCTYPE html>
+
+
+<div>
+    <h4>Sticker</h4>
+    <hr />
+    @{
+        int cho = 1;
+        foreach (var elem in Model.ElSelect)
+        {
+            if (elem.StickId == Model.ElStik.Id && elem.UserId == User.Identity.GetUserId())
+            {
+                <h2>Этот пост у вас в "Избранном"</h2>
+                cho = 0;
+                break;
+            }
+        }
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => Model.ElStik.Title)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => Model.ElStik.Title)
+        </dd>
+    
+        <dt>
+            @Html.DisplayNameFor(model => Model.ElStik.UserName)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => Model.ElStik.UserName)
+        </dd>
+    
+        <dt>
+            @Html.DisplayNameFor(model => Model.ElStik.Text)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => Model.ElStik.Text)
+        </dd>
+    
+        <dt>
+            @Html.DisplayNameFor(model => Model.ElStik.Date)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => Model.ElStik.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => Model.ElStik.Url)
+        </dt>
+    
+        <dd>
+            @Html.DisplayFor(model => Model.ElStik.Url)
+        </dd>
+    
+    </dl>
+</div>
+<p>
+@if (cho == 1){
+    <a href="~/Stickers/Izbran?StickId=@Model.ElStik.Id&UserId=@User.Identity.GetUserId()">Избраное</a>
+}
+@if (Model.ElStik.UserName == User.Identity.GetUserName())
+{
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ElStik.Id })
+}
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

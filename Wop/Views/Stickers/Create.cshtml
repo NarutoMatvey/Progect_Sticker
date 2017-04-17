@@ -1,0 +1,71 @@
+﻿@using Microsoft.AspNet.Identity;
+
+@model Wop.Models.Sticker
+
+
+@{
+    ViewBag.Title = "Добавить объявление";
+}
+
+<link rel="stylesheet" href="~/Content/Dobav.css" type="text/css">
+
+<main class="mdl-layout__content">
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--2-col" id="left-box"></div>
+        <div class="mdl-cell mdl-cell--8-col">
+            <div class="mdl-cell mdl-cell--12-col" id="centr_cont">
+                <div id="doska">
+                    <div class="mdl-card">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="mdl-card__title">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <input type="hidden" name="UserName" value="@User.Identity.GetUserName()" />
+                                </div>
+                                <div class="form-group form-group1">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <label class ="mdl-textfield__label" name="Title" for="sample3">Заголовок</label>
+                                        <input type="Text" id="sample3" name="Tatle" class="mdl-textfield__input" />
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                   </div>
+                                </div>
+                                </div>
+                                
+                                <div class="mdl-card__media">
+                                <div class="form-group form-group1">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="qwer">
+                                        @Html.TextAreaFor(model => model.Text, new { htmlAttributes = new { @class = "form-control", @overflow="auto", @id = "sample1", @resize="none"}})
+                                        @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+</div>
+                        <div class="mdl-card__supporting-text">
+                            <div class="form-group form-group1">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    @Html.LabelFor(model => model.Url, "Ссылка на картинку", htmlAttributes: new { @class = "mdl-textfield__label", @for = "sample2" })
+                                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control", @id = "sample2" } })
+                                    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            </div>
+                            <div class="mdl-card__actions">
+                                <div class="form-group">
+                                    <div class="col-md-10">
+                                        <input type="submit" value="Запостить" class="btn btn-default" />                  
+                                    </div>
+                                </div>
+                            </div >
+                        }
+
+                       
+                    </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</main>
+

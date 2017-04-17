@@ -1,0 +1,56 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/my_stil.css" type="text/css">
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
+        <header class="mdl-layout__header mdl-layout__header--scroll ">
+            <div class="mdl-layout-icon"></div>
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">@ViewBag.Title</span>
+                <div class="mdl-layout-spacer"></div>
+                <!-- Navigation -->
+                <nav class="mdl-navigation ">
+                    @Html.Partial("_LoginPartial") 
+                </nav>
+            </div>
+        </header>
+        <div aria-expanded="true" role="img" tabindex="0" class="mdl-layout__drawer-button">
+            <img src="~/Content/imag/shar.gif" alt="Земля" />
+        </div>
+        @RenderBody()
+        <footer class="mdl-mini-footer">
+            <div class="mdl-mini-footer__left-section">
+                <div class="mdl-logo">
+                    Правила
+                </div>
+                <ul class="mdl-mini-footer__link-list">
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="mdl-mini-footer__right-section">
+                <a href="https://vk.com/narutomatvey"><img src="~/Content/imag/vk.png" alt="Vk.com" title="vk" /></a>
+                <a href="https://twitter.com/sadmeta1ist"><img src="~/Content/imag/twitter.png" alt="Twitter.com" title="twitter" /></a>
+                <a href="https://www.instagram.com/narutomatvey/"><img src="~/Content/imag/Instagram.png" alt="Instahram.com" title="instagram" /></a>
+            </div>
+        </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+        </div>
+</body>
+</html>
